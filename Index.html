@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Superster Academy | About Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #0a192f;
+            --secondary-color: #112240;
+            --accent-color: #64ffda;
+            --text-light: #ccd6f6;
+            --text-dark: #8892b0;
+            --gold-color: #FFD700;
+            --white-color: #ffffff;
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Roboto', sans-serif;
+            --transition-smooth: all 0.3s ease-in-out;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            font-family: var(--font-secondary);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { display: inline-block; padding: 12px 30px; background-color: transparent; color: var(--accent-color); border: 2px solid var(--accent-color); border-radius: 5px; text-decoration: none; font-family: var(--font-primary); font-weight: 600; transition: var(--transition-smooth); cursor: pointer; }
+        .btn:hover { background-color: var(--accent-color); color: var(--primary-color); transform: scale(1.05) translateY(-2px); box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2); }
+
+        .header { background-color: rgba(10, 25, 47, 0.85); backdrop-filter: blur(10px); padding: 1rem 0; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-primary); font-size: 1.8rem; font-weight: 700; color: var(--white-color); text-decoration: none; }
+        .logo .highlight { color: var(--accent-color); }
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li { margin-left: 1.5rem; }
+        .nav-links a { color: var(--text-light); text-decoration: none; font-family: var(--font-primary); font-weight: 500; transition: color 0.3s ease-in-out; padding: 5px 10px; border-radius: 4px; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-color); }
+        .nav-links a.btn { border-width: 2px; padding: 8px 20px;}
+        .menu-icon { display: none; font-size: 1.8rem; color: var(--accent-color); cursor: pointer; }
+
+        #about-page {
+            font-family: 'Poppins', 'Tiro Bangla', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 20px;
+            padding-top: 100px;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            --about-glow-opacity: 0;
+            --about-background-opacity: 0;
+            --about-glow-spread: 0px;
+            --about-connector-color: rgba(100, 255, 218, 0.2);
+        }
+        #about-page.lights-on {
+            --about-glow-opacity: 1;
+            --about-background-opacity: 1;
+            --about-glow-spread: 80px;
+        }
+        #about-page::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient( ellipse at 50% 25%, #ffc94d 0%, #d48a0f 25%, rgba(10, 25, 47, 0) 70% );
+            opacity: var(--about-background-opacity);
+            transition: opacity 0.7s ease-in-out;
+            z-index: -1;
+        }
+        .about-header-wrapper { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; padding: 20px 0; }
+        .banner-lights { display: flex; justify-content: center; margin-bottom: 30px; }
+        .cabinet-light { display: flex; flex-direction: column; align-items: center; }
+        .arm { width: 25px; height: 50px; background: linear-gradient(to top, #444, #888); border-radius: 10px 10px 0 0; }
+        .light-bar {
+            width: 350px; height: 18px; background-color: #fff; border-radius: 20px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, var(--about-glow-opacity)), 0 0 20px rgba(255, 255, 255, var(--about-glow-opacity)), 0 0 40px rgba(255, 201, 77, var(--about-glow-opacity)), 0 0 var(--about-glow-spread) rgba(212, 138, 15, var(--about-glow-opacity));
+            transition: box-shadow 0.7s ease-in-out;
+        }
+        .light-switch-container { position: fixed; top: 100px; right: 25px; z-index: 1001; }
+        .switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #3b2a5f; transition: .4s; border-radius: 34px; border: 1px solid var(--gold-color); }
+        .slider:before { position: absolute; content: "🌙"; height: 26px; width: 26px; left: 4px; bottom: 3px; display: flex; align-items: center; justify-content: center; background-color: white; transition: .4s; border-radius: 50%; color: #231a3b; }
+        input:checked + .slider { background-color: var(--gold-color); }
+        input:checked + .slider:before { transform: translateX(26px); content: "☀️"; }
+        .org-chart-container { max-width: 1400px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 70px; padding-bottom: 100px; }
+        .about-header-section { display: flex; justify-content: center; align-items: center; flex-direction: column; margin-bottom: 20px; }
+        .about-logo-link { display: block; margin-bottom: 20px; }
+        .about-logo {
+            width: 80px; height: 80px; background: url('https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/the%20superster%20academy.jfif') no-repeat center center;
+            background-size: cover; border-radius: 10px; border: 2px solid var(--gold-color); transition: transform 0.3s ease;
+        }
+        .about-logo-link:hover .about-logo { transform: scale(1.1); box-shadow: 0 0 15px var(--accent-color); }
+        .main-title { font-size: 2.5rem; font-weight: 700; text-transform: uppercase; color: var(--accent-color); }
+        .team-section { display: flex; flex-direction: column; align-items: center; position: relative; width: 100%;}
+        .team-section:not(:first-of-type)::before { content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); width: 2px; height: 70px; background-color: var(--about-connector-color); }
+        .team-title { font-size: 1.2rem; font-weight: 600; text-transform: uppercase; margin-bottom: 30px; color: var(--text-light); padding: 5px 20px; border: 1px solid var(--about-connector-color); border-radius: 20px; background-color: var(--secondary-color); }
+        .members-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .member-card { display: flex; flex-direction: column; align-items: center; width: 130px; transition: transform 0.3s ease, opacity 0.5s ease; opacity: 0; transform: translateY(20px); }
+        .member-card.visible { opacity: 1; transform: translateY(0); }
+        .member-card:hover { transform: translateY(-8px) scale(1.05) !important; }
+        .member-photo-container { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--gold-color); overflow: hidden; margin-bottom: 10px; background: #fff; transition: box-shadow 0.3s ease; }
+        .member-card:hover .member-photo-container { box-shadow: 0 0 15px var(--accent-color), 0 0 5px var(--accent-color); }
+        .member-photo-container img { width: 100%; height: 100%; object-fit: cover; }
+        .member-details { background-color: var(--secondary-color); padding: 8px 10px; border-radius: 5px; width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        .member-name { font-size: 0.8rem; font-weight: 600; line-height: 1.2; color: var(--text-light); }
+        .member-role { font-size: 0.7rem; opacity: 0.8; text-transform: uppercase; color: var(--accent-color); }
+        .member-card.founder { transform: translateY(-20px); }
+        .member-card.founder .member-photo-container { width: 110px; height: 110px; border-color: #e74c3c; }
+        .member-card.founder .member-details { background-color: #e74c3c; }
+        .member-card.founder .member-name { font-size: 0.9rem; color: var(--white-color); }
+        .member-card.founder .member-role { color: var(--gold-color); }
+        .member-card.co-founder .member-details { background-color: var(--primary-color); }
+        .member-card.co-founder .member-role { color: var(--gold-color); }
+
+        .trail { position: absolute; width: 8px; height: 8px; background-color: var(--accent-color); border-radius: 50%; pointer-events: none; z-index: 999; box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--gold-color); animation: fadeOut 1s forwards; transform: translate(-50%, -50%); }
+        @keyframes fadeOut { to { opacity: 0; transform: translate(-50%, -50%) scale(0); } }
+
+        .footer { background-color: var(--secondary-color); padding: 4rem 0 2rem 0; text-align: center; }
+        .footer-logo { font-size: 2rem; font-weight: 700; color: var(--white-color); margin-bottom: 1rem; }
+        .footer-logo .highlight { color: var(--accent-color); }
+        .footer p { margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .social-links a { color: var(--text-dark); font-size: 1.5rem; margin: 0 1rem; transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; display: inline-block; }
+        .social-links a:hover { color: var(--accent-color); transform: translateY(-3px); }
+        .copyright { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--primary-color); color: var(--text-dark); font-size: 0.9rem;}
+
+        @media (max-width: 992px) {
+            #about-page { padding: 10px; padding-top: 80px; }
+            .light-bar { width: 80%; max-width: 350px; }
+            .main-title { font-size: 1.8rem; margin-top: 10px; }
+            .team-section::before { display: none; }
+            .members-container { gap: 15px; }
+            .member-card { width: 110px; }
+            .member-photo-container { width: 75px; height: 75px; }
+            .member-name { font-size: 0.7rem; }
+            .member-card.founder .member-photo-container { width: 90px; height: 90px; }
+            .member-card:hover { transform: translateY(0) !important; }
+            .light-switch-container { top: 100px; right: 15px; }
+            .member-card.founder { transform: translateY(0); order: -1; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background-color: var(--secondary-color); flex-direction: column; justify-content: center; align-items: center; transition: right 0.5s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.3); }
+            .nav-links.active { right: 0; }
+            .nav-links li { margin: 1.5rem 0; }
+            .menu-icon { display: block; z-index: 1001; }
+        }
+
+        @media (max-width: 480px) {
+            .about-header-wrapper { padding: 10px 0; }
+            .main-title { font-size: 1.5rem; }
+            .member-card { width: 90px; }
+            .member-photo-container { width: 60px; height: 60px; }
+            .member-card.founder .member-photo-container { width: 75px; height: 75px; }
+            .member-name { font-size: 0.65rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container navbar">
+        <a href="index.html" class="logo">The Superster<span class="highlight">Academy</span></a>
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="course.html">Course</a></li>
+                <li><a href="achievements.html">Achievements</a></li>
+                <li><a href="satisfaction.html">Student Satisfaction</a></li>
+                <li><a href="join.html" class="btn">Join Now</a></li>
+            </ul>
+        </nav>
+        <div class="menu-icon" id="menu-icon"><i class="fas fa-bars"></i></div>
+    </div>
+</header>
+
+<main id="about-page" class="lights-on">
+    <div class="about-header-wrapper">
+        <div class="banner-lights">
+            <div class="cabinet-light"> <div class="arm"></div> <div class="light-bar"></div> </div>
+        </div>
+    </div>
+
+    <div class="light-switch-container">
+        <label class="switch">
+            <input type="checkbox" id="light-toggle" checked>
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <div class="org-chart-container">
+        <div class="about-header-section">
+            <a href="index.html" class="about-logo-link" aria-label="The Superstar Academy Homepage">
+                <div class="about-logo"></div>
+            </a>
+            <h1 class="main-title">The Superstar Academy</h1>
+        </div>
+
+        <div class="team-section">
+            <div class="members-container" style="align-items: flex-start;">
+                <div class="member-card co-founder">
+                    <div class="member-photo-container"><img src="https://github.com/JUWEL-TSA104/thesupersteracademyofficial/blob/main/481902404_564827639942297_761448422007561494_n.jpg?raw=true" alt="Mr. Juwel Rana"></div>
+                    <div class="member-details"><p class="member-name">Mr. Juwel Rana</p><p class="member-role">[CO-FOUNDER]</p></div>
+                </div>
+                <div class="member-card founder">
+                    <div class="member-photo-container"><img src="https://github.com/JUWEL-TSA104/thesupersteracademyofficial/blob/main/506989814_3647819795523218_8106587890812539835_n.jpg?raw=true" alt="MR. Omar Faruk"></div>
+                    <div class="member-details"><p class="member-name">MR. Omar Faruk</p><p class="member-role">[FOUNDER]</p></div>
+                </div>
+                <div class="member-card co-founder">
+                    <div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/anika.jfif" alt="Anika Tabassum Diya"></div>
+                    <div class="member-details"><p class="member-name">Anika Tabassum Diya</p><p class="member-role">[CO-FOUNDER]</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2 class="team-title">Adviser</h2>
+            <div class="members-container">
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/sarabn.jfif" alt="Saraban Tahura Hasie"></div><div class="member-details"><p class="member-name">Saraban Tahura Hasie</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/salma.jfif" alt="Umme Salma"></div><div class="member-details"><p class="member-name">Umme Salma</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/umme%20umia.jfif" alt="Umme Umaia"></div><div class="member-details"><p class="member-name">Umme Umaia</p></div></div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2 class="team-title">Core Leadership Team</h2>
+            <div class="members-container">
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/Ahosan.jfif" alt="Ahasan Habib"></div><div class="member-details"><p class="member-name">Ahasan Habib</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/siddika%20khondokar.jfif" alt="Siddika Khandakar"></div><div class="member-details"><p class="member-name">Siddika Khandakar</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/rasad.jfif" alt="Md. Rashed Chowdhury"></div><div class="member-details"><p class="member-name">Md. Rashed Chowdhury</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://github.com/md-juwel-rana-104/thesupersteracademyofficial/blob/main/fatema.jpg?raw=true" alt="Fatema Tuj Johra"></div><div class="member-details"><p class="member-name">Fatema Tuj Johra</p></div></div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2 class="team-title">IT Team</h2>
+            <div class="members-container">
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/sharnin.jfif" alt="Sharmin Akter"></div><div class="member-details"><p class="member-name">Sharmin Akter</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/morsalin.jfif" alt="MD Morsalim Islam"></div><div class="member-details"><p class="member-name">MD Morsalim Islam</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://github.com/md-juwel-rana-104/thesupersteracademyofficial/blob/main/sahida.png?raw=true" alt="Sahida Parvin"></div><div class="member-details"><p class="member-name">Sahida Parvin</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://github.com/md-juwel-rana-104/thesupersteracademyofficial/blob/main/afiya.jpg?raw=true" alt="Afiya Ayman"></div><div class="member-details"><p class="member-name">Afiya Ayman</p></div></div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2 class="team-title">Creative Team</h2>
+            <div class="members-container">
+                <div class="member-card"><div class="member-photo-container"><img src="https://github.com/md-juwel-rana-104/thesupersteracademyofficial/blob/main/tr%20lima.jpg?raw=true" alt="TR Lima"></div><div class="member-details"><p class="member-name">TR Lima</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://github.com/md-juwel-rana-104/thesupersteracademyofficial/blob/main/na%20diba.jpg?raw=true" alt="Nabila Tabassum Diba"></div><div class="member-details"><p class="member-name">Nabila Tabassum Diba</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/fozle.jfif" alt="Fozle Rabby"></div><div class="member-details"><p class="member-name">Fozle Rabby</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/susmita.jfif" alt="Sumita Barman"></div><div class="member-details"><p class="member-name">Sumita Barman</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/ayesa%20siddika.jfif" alt="Aysha Siddika"></div><div class="member-details"><p class="member-name">Aysha Siddika</p></div></div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2 class="team-title">Tour & Incentive Team</h2>
+            <div class="members-container">
+                <div class="member-card"><div class="member-photo-container"><img src="https://github.com/md-juwel-rana-104/thesupersteracademyofficial/blob/main/md%20mahafuz.jpg?raw=true" alt="Md Mahfuz Rahman"></div><div class="member-details"><p class="member-name">Md Mahfuz Rahman</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://github.com/md-juwel-rana-104/thesupersteracademyofficial/blob/main/tahmina.jpg?raw=true" alt="Tahmina Tonny"></div><div class="member-details"><p class="member-name">Tahmina Tonny</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://github.com/md-juwel-rana-104/thesupersteracademyofficial/blob/main/tanni.jpg?raw=true" alt="Tanni Rahman"></div><div class="member-details"><p class="member-name">Tanni Rahman</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/soib%20n00r.jfif" alt="Shoaib Ahmed Nur"></div><div class="member-details"><p class="member-name">Shoaib Ahmed Nur</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://github.com/md-juwel-rana-104/thesupersteracademyofficial/blob/main/rahdia.jpg?raw=true" alt="Radia Sultana"></div><div class="member-details"><p class="member-name">Radia Sultana</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://github.com/md-juwel-rana-104/thesupersteracademyofficial/blob/main/sakib.jpg?raw=true" alt="Sakib Hossain"></div><div class="member-details"><p class="member-name">Sakib Hossain</p></div></div>
+                <div class="member-card"><div class="member-photo-container"><img src="https://raw.githubusercontent.com/md-juwel-rana-104/thesupersteracademyofficial/refs/heads/main/niamul.jfif" alt="Niamul islam"></div><div class="member-details"><p class="member-name">Niamul islam</p></div></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-logo">The Superster<span class="highlight">Academy</span></div>
+        <p>The most trusted platform for online earning opportunities. We've helped over 12,000 people achieve financial freedom through our proven system. Join us and unlock your true potential!</p>
+        <div class="social-links">
+            <a href="https://www.facebook.com/share/g/1GFmtw2Ewr/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/8801705241369" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="copyright"><p>© 2024 The Superster Academy. All Rights Reserved. Designed for success.</p></div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuIcon = document.getElementById('menu-icon');
+        const navLinksMobile = document.getElementById('nav-links');
+
+        const initMobileMenu = () => { if (menuIcon && navLinksMobile) menuIcon.addEventListener('click', () => navLinksMobile.classList.toggle('active')); };
+        const initLightTrail = () => { document.addEventListener('mousemove', e => { const t=document.createElement('div'); t.className='trail'; t.style.left=e.pageX+'px'; t.style.top=e.pageY+'px'; document.body.appendChild(t); setTimeout(()=>t.remove(),1000); }); };
+
+        const initAboutPageAnimations = () => {
+            const lightToggle = document.getElementById('light-toggle');
+            const aboutPage = document.getElementById('about-page');
+            if (lightToggle && aboutPage) {
+                lightToggle.addEventListener('change', () => aboutPage.classList.toggle('lights-on'));
+            }
+            const memberCards = document.querySelectorAll('#about-page .member-card');
+            const observer = new IntersectionObserver(e => e.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); }), { threshold: 0.1 });
+            memberCards.forEach((card, i) => { card.style.transitionDelay = `${i * 50}ms`; observer.observe(card); });
+        };
+
+        initMobileMenu();
+        initLightTrail();
+        initAboutPageAnimations();
+    });
+</script>
+</body>
+  </html>
